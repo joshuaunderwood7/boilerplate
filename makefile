@@ -3,6 +3,7 @@ CPPFLAGS=-std=c++11 -Iinclude/
 LDFLAGS=
 LDLIBS=
 BUILDFLAG=
+MAKEFLAGS := --jobs=$(shell nproc)
 
 SRC_DIR = src
 OBJ_DIR = obj
