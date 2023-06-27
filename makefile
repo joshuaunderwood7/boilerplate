@@ -18,6 +18,8 @@ C_OBJ = $(C_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CPP_SRC = $(wildcard $(SRC_DIR)/*.cpp)
 CPP_OBJ = $(CPP_SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
+PRG_SRC = $(notdir $(patsubst %.cpp,%,$(wildcard $(PRG_DIR)/*.cpp)))
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 
 	$(CC) $(CPPFLAGS) $(BUILDFLAG) -c $< -o $@
 
@@ -28,7 +30,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(CPPFLAGS) $(BUILDFLAG) $^ $(LDFLAGS) $(LDLIBS) -o $(BIN_DIR)/$@
 
 .PHONEY: all clean
-all: program
+all: $(PRG_SRC)
 
 opt: BUILDFLAG += -O2 -s
 opt: all
